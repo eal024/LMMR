@@ -50,27 +50,16 @@ print(snitt)
 print(medianer)
 ```
 
-Sørg for å justere `na.rm = TRUE` for å håndtere eventuelle NA-verdier.
+# Sørg for å justere `na.rm = TRUE` for å håndtere eventuelle NA-verdier.
 
-```r 
 chat$chat( "kan du lage et enkelt datasett, slik at jeg kan teste?")
-```
 
-```R
-# Opprett et datasett med noen variabler
-df <- data.frame(
-  A = c(1, 2, 3, 4, 5),
-  B = c(2, 3, NA, 5, 8),
-  C = c(5, 6, 7, 8, 10)
-)
+
 
 # Vis datasettet
-print(df)
-```
+# print(df)
+# Dette datasettet `df` har tre variabler (A, B og C) med fem observasjoner hver. Du kan bruke dette datasettet til å teste ut snitt og median.
 
-Dette datasettet `df` har tre variabler (A, B og C) med fem observasjoner hver. Du kan bruke dette datasettet til å teste ut snitt og median.
-
-```{r}
 chat <- chat_openai(
     model = "gpt-4o-mini",
     system_prompt = 
@@ -78,39 +67,13 @@ chat <- chat_openai(
     Just give me the code. I don't want any explanation or sample data.
     Dont return the answar with ```r ```, but with # (out commeting) 
     "
-
-)
-
-```
+    )
 
 
 
-```{r}
-chat$chat(question)
-
-```
-
-Feedback: 
-```{r}
-library(data.table)
-
-dt <- as.data.table(df)
-
-# Anta df er en data.table
-result <- dt[,
-    .(  snitt = lapply(.SD, mean, na.rm = TRUE),
-        median = lapply(.SD, median, na.rm = TRUE)
-        vars = c("A", "B", "C")
-        ), .SDcols =  c("A", "B", "C")
-        ]
-
-result
-```
-
-```{r}
-chat$chat("Can you give the code in base R. Use the base pip |> and always use double quotes for strings")
-
-```
+chat$chat("
+  I want to 
+  Can you give the code in base R. Use the base pip |> and always use double quotes for strings")
 
 
 
